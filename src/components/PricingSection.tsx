@@ -1,39 +1,52 @@
 import React, { useState } from "react";
-import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./ui/collapsible";
 import {
   Check,
   X,
-  Clock,
-  Shield,
   ArrowRight,
-  Phone,
-  Eye,
   Users,
   Target,
   Zap,
   Send,
-  CreditCard,
-  Filter,
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
 import { CheckmarkIcon } from "./CheckmarkIcon";
 
+type PlanTier = "signature" | "pro" | "prestige";
+
+type FeatureValue = boolean | string;
+
+interface Plan {
+  name: string;
+  displayName: string;
+  price: string;
+  currency: string;
+  description: string;
+  features: string[];
+  cta: string;
+  popular: boolean;
+  tier: PlanTier;
+}
+
+interface ComparisonFeature {
+  name: string;
+  signature: FeatureValue;
+  pro: FeatureValue;
+  prestige: FeatureValue;
+}
+
+interface ComparisonCategory {
+  category: string;
+  features: ComparisonFeature[];
+}
+
 export function PricingSection() {
-  const [openPlan, setOpenPlan] = useState<string | null>(null);
+  const [openPlan, setOpenPlan] = useState<PlanTier | null>(null);
   // Nouvel état pour gérer le flou progressif du tableau comparatif
   const [isComparisonExpanded, setIsComparisonExpanded] = useState(false);
 
-  const plans = [
+  const plans: Plan[] = [
     {
       name: "WebAcces Signature",
       displayName: "WebAcces Signature",
@@ -63,13 +76,13 @@ export function PricingSection() {
       features: [
         "Site 5-7 pages (accueil, à propos, service / produit, blog, contact…)",
         "Identité graphique poussée, design sur-mesure",
-        "Micro-interactions et animations pour sublimer l'expérience",
+        "Micro-interactions et animations pour sublimer l&apos;expérience",
         "Optimisation SEO (structure, performance)",
         "Intégration e-commerce ou prise de rendez-vous",
         "3 révisions",
         "Délais : 30-45 jours",
       ],
-      cta: "Rejoindre l'élite",
+      cta: "Rejoindre l&apos;élite",
       popular: true,
       tier: "pro",
     },
@@ -103,7 +116,7 @@ export function PricingSection() {
   ];
 
   // DONNÉES RÉORGANISÉES : Tri "Waterfall" (Signature -> Pro -> Prestige)
-  const comparisonFeatures = [
+  const comparisonFeatures: ComparisonCategory[] = [
     {
       category: "Design & Développement",
       features: [
@@ -316,7 +329,7 @@ export function PricingSection() {
     },
   ];
 
-  const renderPrestigeCard = (plan: any) => {
+  const renderPrestigeCard = (plan: Plan): JSX.Element => {
     return (
       <div className="relative bg-[#ffffff] border border-[#d2d2d2] hover:border-[#2b2b2b] rounded-lg p-6 md:p-8 transition-all duration-200 overflow-hidden">
         {/* Effet de flou en arrière-plan */}
@@ -442,7 +455,7 @@ export function PricingSection() {
                   className="font-['Instrument_Sans',_sans-serif] text-base md:text-sm text-[#6a6a6a] leading-relaxed"
                   style={{ fontWeight: 400 }}
                 >
-                  Une équipe d'experts devient votre extension
+                  Une équipe d&apos;experts devient votre extension
                   digitale : designer, développeur, stratège et
                   gestionnaire de projet dédiés.
                 </p>
@@ -506,7 +519,7 @@ export function PricingSection() {
                   className="font-['Instrument_Sans',_sans-serif] text-base md:text-sm text-[#6a6a6a] leading-relaxed"
                   style={{ fontWeight: 400 }}
                 >
-                  Avoir l'ambition de dominer votre marché
+                  Avoir l&apos;ambition de dominer votre marché
                 </span>
               </div>
             </div>
@@ -537,16 +550,15 @@ export function PricingSection() {
   };
 
   // Fonction pour obtenir la valeur d'une fonctionnalité pour un plan spécifique
-  const getFeatureValue = (feature: any, planType: 'signature' | 'pro' | 'prestige') => {
-    return feature[planType];
-  };
+  const getFeatureValue = (feature: ComparisonFeature, planType: PlanTier): FeatureValue =>
+    feature[planType];
 
   // Rendu du tableau mobile avec dropdowns
   const renderMobileComparison = () => {
-    const planTypes: Array<{key: 'signature' | 'pro' | 'prestige', name: string, popular?: boolean, price: string}> = [
-      { key: 'signature', name: 'Signature', price: '4 000 CHF' },
-      { key: 'pro', name: 'Pro', popular: true, price: '7 000 CHF' },
-      { key: 'prestige', name: 'Prestige', price: '12 000 CHF' }
+    const planTypes: Array<{ key: PlanTier; name: string; popular?: boolean; price: string }> = [
+      { key: "signature", name: "Signature", price: "4 000 CHF" },
+      { key: "pro", name: "Pro", popular: true, price: "7 000 CHF" },
+      { key: "prestige", name: "Prestige", price: "12 000 CHF" }
     ];
 
     return (
@@ -668,7 +680,7 @@ export function PricingSection() {
           className="font-['Instrument_Sans',_sans-serif] text-xl md:text-lg text-[#6a6a6a] max-w-3xl mx-auto leading-relaxed text-justify"
           style={{ fontWeight: 400 }}
         >
-          Chaque site est conçu à partir d'un diagnostic
+          Chaque site est conçu à partir d&apos;un diagnostic
           approfondi de votre marque, de vos objectifs et de
           votre audience. Les entreprises ambitieuses
           choisissent WebAcces pour passer un cap : un site qui
@@ -796,7 +808,7 @@ export function PricingSection() {
           className="font-['Instrument_Sans',_sans-serif] text-lg md:text-base leading-relaxed shimmer-text"
           style={{ fontWeight: 400 }}
         >
-          Vous ne payez qu'une fois séduit par nos designs et
+          Vous ne payez qu&apos;une fois séduit par nos designs et
           propositions créatives.
         </p>
       </div>

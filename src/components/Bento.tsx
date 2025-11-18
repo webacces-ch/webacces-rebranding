@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { ChevronDown, Lock, Mic, Rocket, Scan, Search, Sparkles } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -75,7 +75,7 @@ const cardBase =
   "relative overflow-hidden rounded-[32px] border border-[#E4E4E7] bg-white p-8 shadow-[0_2px_8px_rgba(15,23,42,0.04)] transition-all duration-300";
 
 // Variantes d'animation pour l'apparition
-const containerVariants: any = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -85,7 +85,7 @@ const containerVariants: any = {
   },
 };
 
-const itemVariants: any = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50 } },
 };
@@ -100,7 +100,7 @@ const Bento = () => {
           transition={{ duration: 0.5 }}
           className="text-[34px] font-semibold tracking-tight text-neutral-900"
         >
-          Besoin d'un site ?
+          Besoin d&apos;un site ?
         </motion.h2>
       </header>
 

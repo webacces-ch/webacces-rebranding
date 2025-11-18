@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useEffect, useState } from "react";
 
 function preloadImage(url: string): Promise<void> {
@@ -15,27 +14,32 @@ function preloadImage(url: string): Promise<void> {
  * before reporting the app as ready. This helps ensure initial animations
  * mount without layout shifts or missing assets.
  */
-export function useAppReady(imageUrls: string[] = [], minDelayMs = 250) {
+export function useAppReady(imageUrls: readonly string[] = [], minDelayMs = 250) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
+    let firstFrame = 0;
+    let secondFrame = 0;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
     const fontsReady: Promise<void> =
-      typeof document !== "undefined" && (document as any).fonts?.ready
-        ? (document as any).fonts.ready.then(() => {})
+      typeof document !== "undefined" && "fonts" in document && document.fonts
+        ? document.fonts.ready.then(() => undefined)
         : Promise.resolve();
 
     const rafTwice = new Promise<void>((resolve) => {
-      requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+      firstFrame = requestAnimationFrame(() => {
+        secondFrame = requestAnimationFrame(() => resolve());
+      });
     });
 
     const minDelay = new Promise<void>((resolve) => {
-      const t = setTimeout(() => resolve(), minDelayMs);
-      // no cleanup necessary; timeout completes quickly
+      timeoutId = setTimeout(() => resolve(), minDelayMs);
     });
 
-    const imagesReady = Promise.all(imageUrls.map(preloadImage)).then(() => {});
+    const urlsToPreload = [...imageUrls];
+    const imagesReady = Promise.all(urlsToPreload.map(preloadImage)).then(() => undefined);
 
     Promise.all([fontsReady, imagesReady, rafTwice, minDelay]).then(() => {
       if (!cancelled) setReady(true);
@@ -43,8 +47,11 @@ export function useAppReady(imageUrls: string[] = [], minDelayMs = 250) {
 
     return () => {
       cancelled = true;
+      if (firstFrame) cancelAnimationFrame(firstFrame);
+      if (secondFrame) cancelAnimationFrame(secondFrame);
+      if (timeoutId) clearTimeout(timeoutId);
     };
-  }, [JSON.stringify(imageUrls), minDelayMs]);
+  }, [imageUrls, minDelayMs]);
 
   return ready;
 }
