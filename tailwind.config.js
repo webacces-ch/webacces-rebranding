@@ -2,13 +2,18 @@
  * Tailwind v3/v4 compatible config
  ********************/
 /** @type {import('tailwindcss').Config} */
-export default {
+const config = {
   content: [
-    "./index.html",
-    "./src/**/*.{js,jsx,ts,tsx}",
+    "./src/app/**/*.{ts,tsx,js,jsx}",
+    "./src/components/**/*.{ts,tsx,js,jsx}",
+    "./src/hooks/**/*.{ts,tsx,js,jsx}",
+    "./src/styles/**/*.css",
+    "./src/index.css",
   ],
   theme: {
     extend: {},
   },
   plugins: [],
 };
+
+export default config;

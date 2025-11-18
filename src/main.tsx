@@ -1,9 +1,2 @@
-// @ts-nocheck
-import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
-import "./index.css";
-import "./styles/globals.css";
-import "./styles/tw.css";
-
-createRoot(document.getElementById("root")!).render(<App />);
+// Legacy Vite entry point. Next.js uses files in src/app instead.
   

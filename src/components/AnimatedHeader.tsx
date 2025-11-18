@@ -1,8 +1,9 @@
-// @ts-nocheck
+import React from "react";
 import { motion } from "motion/react";
+import Image from "next/image";
 import svgPaths from "../imports/svg-ti869rgl6z";
 // Real asset imports replacing previous data URI placeholders.
-import imgArriere from "../assets/logo-arriere.png";
+import imgArriere from "../assets/logo-arriere.svg";
 import imgImage from "../assets/rania.png";
 import imgImage1 from "../assets/lionel.png";
 import imgImage2 from "../assets/dario.png";
@@ -36,12 +37,18 @@ function Group6() {
         <div className="flex-none">
           <div className="h-[33.813px] relative w-[33.888px]" data-name="arrière">
             <div className="absolute inset-[-1.67%]">
-              <img alt="" className="block max-w-none size-full" height="34.942" src={imgArriere} width="35.017" />
+              <Image
+                alt="Fond du logo Webacces"
+                className="block max-w-none size-full"
+                src={imgArriere}
+                sizes="36px"
+                priority
+              />
             </div>
           </div>
         </div>
       </div>
-      <div className="[grid-area:1_/_1] h-[33.813px] ml-[1.129px] mt-[1.059px] relative w-[33.888px]" data-name="logo">
+{/*        <div className="[grid-area:1_/_1] h-[33.813px] ml-[1.129px] mt-[1.059px] relative w-[33.888px]" data-name="logo">
         <div className="absolute inset-[-1.67%]">
           <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 36 36">
             <g id="logo">
@@ -63,7 +70,7 @@ function Group6() {
             </defs>
           </svg>
         </div>
-      </div>
+      </div>  */}
     </div>
   );
 }
@@ -186,12 +193,19 @@ function Frame65() {
   return (
     <div className="content-stretch flex gap-[5.259px] items-center relative shrink-0">
       <div className="relative rounded-[12.623px] shrink-0 size-[25.245px]" data-name="image">
-  <img alt="" className="absolute inset-0 max-w-none object-center object-cover pointer-events-none rounded-[12.623px] size-full" src={imgImage} />
+        <Image
+          alt="Portrait de Rania B."
+          className="absolute inset-0 max-w-none object-center object-cover pointer-events-none rounded-[12.623px]"
+          src={imgImage}
+          fill
+          sizes="25px"
+          placeholder="blur"
+        />
       </div>
   <div className="font-medium leading-[normal] relative shrink-0 text-[#333333] text-[0px] text-nowrap whitespace-pre" style={{ fontFamily: "Instrument Sans, system-ui, sans-serif", fontVariationSettings: "'wdth' 100" }}>
         <p className="mb-0">Rania B.</p>
         <p className="text-[#c2c2c2] text-[10px]" style={{ fontVariationSettings: "'wdth' 100" }}>
-          Chef de projet d'une agence de voyage en ligne
+          Chef de projet d&apos;une agence de voyage en ligne
         </p>
       </div>
     </div>
@@ -228,12 +242,19 @@ function Frame68() {
   return (
     <div className="content-stretch flex gap-[5.259px] items-center relative shrink-0">
       <div className="relative rounded-[12.623px] shrink-0 size-[25.245px]" data-name="image">
-  <img alt="" className="absolute inset-0 max-w-none object-center object-cover pointer-events-none rounded-[12.623px] size-full" src={imgImage1} />
+        <Image
+          alt="Portrait de Lionel G."
+          className="absolute inset-0 max-w-none object-center object-cover pointer-events-none rounded-[12.623px]"
+          src={imgImage1}
+          fill
+          sizes="25px"
+          placeholder="blur"
+        />
       </div>
   <div className="font-medium leading-[normal] relative shrink-0 text-[#333333] text-[0px] w-[211.137px]" style={{ fontFamily: "Instrument Sans, system-ui, sans-serif", fontVariationSettings: "'wdth' 100" }}>
         <p className="mb-0">Lionel G.</p>
         <p className="text-[#c2c2c2] text-[10px]" style={{ fontVariationSettings: "'wdth' 100" }}>
-          Co-fondateur d'une startup en e-commerce
+          Co-fondateur d&apos;une startup en e-commerce
         </p>
       </div>
     </div>
@@ -272,9 +293,16 @@ function Frame71() {
   return (
     <div className="content-stretch flex gap-[5.259px] items-center relative shrink-0">
       <div className="relative rounded-[12.623px] shrink-0 size-[25.245px]" data-name="image 1">
-  <img alt="" className="absolute inset-0 max-w-none object-center object-cover pointer-events-none rounded-[12.623px] size-full" src={imgImage2} />
+        <Image
+          alt="Portrait de Dario S."
+          className="absolute inset-0 max-w-none object-center object-cover pointer-events-none rounded-[12.623px]"
+          src={imgImage2}
+          fill
+          sizes="25px"
+          placeholder="blur"
+        />
       </div>
-  <div className="font-medium font-semibold leading-[normal] relative shrink-0 text-[#333333] text-[0px] w-[152px]" style={{ fontFamily: "Instrument Sans, system-ui, sans-serif", fontVariationSettings: "'wdth' 100" }}>
+  <div className="font-semibold leading-[normal] relative shrink-0 text-[#333333] text-[0px] w-[152px]" style={{ fontFamily: "Instrument Sans, system-ui, sans-serif", fontVariationSettings: "'wdth' 100" }}>
         <p className="mb-0" style={{ fontVariationSettings: "'wdth' 100" }}>
           Dario S.
         </p>

@@ -2,6 +2,9 @@
 /* Geist sans (variable) via CDN fallback. If you self-host later, replace with @font-face rules. */
 @import url("https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@5.0.3/index.css");
 @import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /*! tailwindcss v4.1.3 | MIT License | https://tailwindcss.com */
 @layer properties {
   @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
