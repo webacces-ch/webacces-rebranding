@@ -174,7 +174,7 @@ const ProjectsSection = () => {
     : projects.slice(0, initialVisibleCards);
 
   return (
-    <section id="projects" className="mx-auto max-w-6xl px-4 pb-24 pt-48 sm:px-6 lg:px-8">
+    <section id="projects" className="mx-auto max-w-8xl px-4 pb-24 pt-48 sm:px-6 lg:px-8">
       {/* Header avec animation d'entrée */}
       <motion.header
         initial={{ opacity: 0, y: 20 }}
