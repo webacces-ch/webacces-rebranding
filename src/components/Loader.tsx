@@ -102,7 +102,7 @@ export default function Preloader() {
                       {counter}%
                    </motion.p>
                    <p className="text-xs font-medium uppercase tracking-[0.2em] text-neutral-400 mt-2">
-                      Chargement de l'expérience
+                     Chargement de l&apos;expérience
                    </p>
                 </div>
             </motion.div>

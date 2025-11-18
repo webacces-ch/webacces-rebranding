@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import Image from "next/image";
 import { AnimatedBeam } from "@/components/ui/animated-beam"; 
 import { Cpu } from "lucide-react";
 import { motion } from "framer-motion";
@@ -51,7 +52,13 @@ export default function TechStack() {
                 whileHover={{ scale: 1.05, rotate: 3 }}
                 className="flex h-24 w-24 md:h-28 md:w-28 items-center justify-center rounded-[32px] border bg-white shadow-lg transition-all hover:shadow-xl"
               >
-                <img className="h-12 w-12 md:h-14 md:w-14 object-contain" src={fw.logo} alt={fw.name} />
+                <Image
+                  className="h-12 w-12 md:h-14 md:w-14 object-contain"
+                  src={fw.logo}
+                  alt={fw.name}
+                  width={56}
+                  height={56}
+                />
               </motion.div>
               <span className="text-lg font-semibold text-neutral-600">{fw.name}</span>
             </div>

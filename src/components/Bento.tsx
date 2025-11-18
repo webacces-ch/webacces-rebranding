@@ -4,8 +4,6 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, type Variants } from "framer-motion";
 import { ChevronDown, Lock, Mic, Rocket, Scan, Search, Sparkles } from "lucide-react";
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
 
 // --- Imports des images (garde tes imports existants) ---
 // Remplace par tes vrais chemins si nécessaire
@@ -18,11 +16,6 @@ import applePayLogo from "@/assets/bento/ApplePay.svg";
 import avatarElouan from "@/assets/nous/elouan.png";
 import avatarLeo from "@/assets/nous/leo.png";
 import avatarMaxime from "@/assets/nous/maxime.png";
-
-// --- Utilitaires ---
-function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
 
 // Petit composant pour animer les nombres (ex: 0 -> 6392)
 const Counter = ({ value, prefix = "", suffix = "" }: { value: number, prefix?: string, suffix?: string }) => {

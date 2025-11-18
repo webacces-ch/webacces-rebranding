@@ -13,7 +13,6 @@ import imgImage2 from "@/assets/dario.png";
 import InsightsSection from "@/components/InsightsSection";
 import ContactSection from "@/components/ContactSection";
 import Hesiter from "@/components/Hesiter";
-import TechStack from "@/components/TechStack";
 
 export default function HomePage() {
   // Vérifie bien les extensions (.png vs .svg) selon tes fichiers réels
