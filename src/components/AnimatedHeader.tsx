@@ -426,7 +426,7 @@ function VoirToutLesAvis() {
 export default function AnimatedHeader() {
   return (
     <div className="bg-white content-stretch flex flex-col gap-[10px] items-center relative size-full overflow-x-hidden" data-name="HEADER">
-      <div className="relative w-full max-w-[1440px] flex flex-col items-center gap-[10px]">
+      <div className="relative w-full max-w-[1440px] flex flex-col items-center gap-[10px] overflow-hidden">
         <Navbar />
         <Frame222 />
         <VoirToutLesAvis />
@@ -438,24 +438,24 @@ export default function AnimatedHeader() {
           transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
         >
           <motion.div
-            className="flex-none rotate-[9.623deg]"
-            animate={{ 
-              rotate: [9.623, 9.623 + 5, 9.623],
-              y: [0, -5, 0]
-            }}
-            transition={{ 
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
+        className="flex-none rotate-[9.623deg]"
+        animate={{ 
+          rotate: [9.623, 9.623 + 5, 9.623],
+          y: [0, -5, 0]
+        }}
+        transition={{ 
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
           >
-            <div className="relative size-[60px]">
-              <div className="absolute inset-[2.13%]">
-                <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 58 58">
-                  <path d={svgPaths.p2cf2c440} fill="var(--fill-0, #FFADF1)" id="Star 3" />
-                </svg>
-              </div>
-            </div>
+        <div className="relative size-[60px]">
+          <div className="absolute inset-[2.13%]">
+            <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 58 58">
+          <path d={svgPaths.p2cf2c440} fill="var(--fill-0, #FFADF1)" id="Star 3" />
+            </svg>
+          </div>
+        </div>
           </motion.div>
         </motion.div>
         <motion.div
@@ -466,24 +466,24 @@ export default function AnimatedHeader() {
           transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
           <motion.div
-            className="flex-none rotate-[347.695deg]"
-            animate={{ 
-              rotate: [347.695, 347.695 - 5, 347.695],
-              y: [0, 5, 0]
-            }}
-            transition={{ 
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
+        className="flex-none rotate-[347.695deg]"
+        animate={{ 
+          rotate: [347.695, 347.695 - 5, 347.695],
+          y: [0, 5, 0]
+        }}
+        transition={{ 
+          duration: 5,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
           >
-            <div className="relative size-[76px]">
-              <div className="absolute inset-[1.626%]">
-                <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 74 74">
-                  <path d={svgPaths.p7aa3300} fill="var(--fill-0, #71E988)" id="Star 2" />
-                </svg>
-              </div>
-            </div>
+        <div className="relative size-[76px]">
+          <div className="absolute inset-[1.626%]">
+            <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 74 74">
+          <path d={svgPaths.p7aa3300} fill="var(--fill-0, #71E988)" id="Star 2" />
+            </svg>
+          </div>
+        </div>
           </motion.div>
         </motion.div>
         <motion.div
@@ -494,24 +494,24 @@ export default function AnimatedHeader() {
           transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
           <motion.div
-            className="flex-none rotate-[14.077deg]"
-            animate={{ 
-              rotate: [14.077, 14.077 + 5, 14.077],
-              y: [0, -8, 0]
-            }}
-            transition={{ 
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
+        className="flex-none rotate-[14.077deg]"
+        animate={{ 
+          rotate: [14.077, 14.077 + 5, 14.077],
+          y: [0, -8, 0]
+        }}
+        transition={{ 
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
           >
-            <div className="relative size-[81px]">
-              <div className="absolute inset-[2.85%_9%]">
-                <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 67 77">
-                  <path d={svgPaths.p32457900} fill="var(--fill-0, #6461FC)" id="Star 1" />
-                </svg>
-              </div>
-            </div>
+        <div className="relative size-[81px]">
+          <div className="absolute inset-[2.85%_9%]">
+            <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 67 77">
+          <path d={svgPaths.p32457900} fill="var(--fill-0, #6461FC)" id="Star 1" />
+            </svg>
+          </div>
+        </div>
           </motion.div>
         </motion.div>
       </div>

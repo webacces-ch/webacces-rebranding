@@ -30,6 +30,8 @@ import { CheckmarkIcon } from "./CheckmarkIcon";
 
 export function PricingSection() {
   const [openPlan, setOpenPlan] = useState<string | null>(null);
+  // Nouvel état pour gérer le flou progressif du tableau comparatif
+  const [isComparisonExpanded, setIsComparisonExpanded] = useState(false);
 
   const plans = [
     {
@@ -100,10 +102,12 @@ export function PricingSection() {
     },
   ];
 
+  // DONNÉES RÉORGANISÉES : Tri "Waterfall" (Signature -> Pro -> Prestige)
   const comparisonFeatures = [
     {
       category: "Design & Développement",
       features: [
+        // Niveau 1 : Inclus partout (Signature)
         {
           name: "Landing page sur-mesure",
           signature: true,
@@ -111,20 +115,21 @@ export function PricingSection() {
           prestige: true,
         },
         {
-          name: "Site multi-pages (5-7 pages)",
-          signature: false,
+          name: "Design aligné au branding",
+          signature: true,
           pro: true,
           prestige: true,
         },
         {
-          name: "Pages illimitées",
-          signature: false,
-          pro: false,
+          name: "Animations légères",
+          signature: true,
+          pro: true, // Pro inclut mieux, mais inclut "au moins" ça techniquement
           prestige: true,
         },
+        // Niveau 2 : Ajout Pro
         {
-          name: "Design aligné au branding",
-          signature: true,
+          name: "Site multi-pages (5-7 pages)",
+          signature: false,
           pro: true,
           prestige: true,
         },
@@ -135,21 +140,22 @@ export function PricingSection() {
           prestige: true,
         },
         {
-          name: "Design totalement sur-mesure",
+          name: "Micro-interactions",
+          signature: false,
+          pro: true,
+          prestige: true,
+        },
+        // Niveau 3 : Exclusif Prestige
+        {
+          name: "Pages illimitées",
           signature: false,
           pro: false,
           prestige: true,
         },
         {
-          name: "Animations légères",
-          signature: true,
-          pro: false,
-          prestige: false,
-        },
-        {
-          name: "Micro-interactions",
+          name: "Design totalement sur-mesure",
           signature: false,
-          pro: true,
+          pro: false,
           prestige: true,
         },
         {
@@ -181,12 +187,20 @@ export function PricingSection() {
     {
       category: "Optimisation & Performance",
       features: [
+        // Niveau 2 : Ajout Pro
         {
           name: "Optimisation SEO structure",
           signature: false,
           pro: true,
           prestige: true,
         },
+        {
+          name: "Optimisation performance",
+          signature: false,
+          pro: true,
+          prestige: true,
+        },
+        // Niveau 3 : Exclusif Prestige
         {
           name: "SEO avancé",
           signature: false,
@@ -197,12 +211,6 @@ export function PricingSection() {
           name: "Optimisation conversion (CRO)",
           signature: false,
           pro: false,
-          prestige: true,
-        },
-        {
-          name: "Optimisation performance",
-          signature: false,
-          pro: true,
           prestige: true,
         },
         {
@@ -222,6 +230,7 @@ export function PricingSection() {
     {
       category: "Intégrations",
       features: [
+        // Niveau 1 : Inclus partout
         {
           name: "Contact / Newsletter",
           signature: true,
@@ -234,12 +243,14 @@ export function PricingSection() {
           pro: true,
           prestige: true,
         },
+        // Niveau 2 : Ajout Pro
         {
           name: "E-commerce",
           signature: false,
           pro: true,
           prestige: true,
         },
+        // Niveau 3 : Exclusif Prestige
         {
           name: "Intégration CRM",
           signature: false,
@@ -257,6 +268,7 @@ export function PricingSection() {
     {
       category: "Service & Support",
       features: [
+        // Variables (Textes)
         {
           name: "Révisions incluses",
           signature: "2",
@@ -269,6 +281,7 @@ export function PricingSection() {
           pro: "30-45 jours",
           prestige: "sur mesure",
         },
+        // Niveau 3 : Exclusif Prestige (Le gros du service est ici)
         {
           name: "Accompagnement 3 mois",
           signature: false,
@@ -306,7 +319,7 @@ export function PricingSection() {
   const renderPrestigeCard = (plan: any) => {
     return (
       <div className="relative bg-[#ffffff] border border-[#d2d2d2] hover:border-[#2b2b2b] rounded-lg p-6 md:p-8 transition-all duration-200 overflow-hidden">
-        {/* Effet de flou en arrière-plan - Opacités réduites pour plus de discrétion */}
+        {/* Effet de flou en arrière-plan */}
         <div className="absolute inset-0 pointer-events-none">
           {/* Rideau flou principal */}
           <div
@@ -806,207 +819,175 @@ export function PricingSection() {
           </p>
         </div>
 
-        {/* Tableau Desktop */}
-        <div className="hidden md:block rounded-lg overflow-hidden bg-[#ffffff] overflow-x-auto">
-          <table className="w-full min-w-[600px]">
-            <thead>
-              <tr className="bg-[#ffffff] border-b border-[#e2e2e2]">
-                <th
-                  className="text-left py-4 px-4 md:px-6 font-['Instrument_Sans',_sans-serif] text-base md:text-sm text-[#333333] border-r border-[#e2e2e2]"
-                  style={{ fontWeight: 500 }}
-                >
-                  Fonctionnalités
-                </th>
-                <th
-                  className="text-center py-4 px-3 md:px-4 font-['Instrument_Sans',_sans-serif] text-base md:text-sm text-[#333333] border-r border-[#e2e2e2]"
-                  style={{ fontWeight: 500 }}
-                >
-                  Signature
-                </th>
-                <th
-                  className="text-center py-4 px-3 md:px-4 font-['Instrument_Sans',_sans-serif] text-base md:text-sm text-[#333333] border-r border-[#e2e2e2] bg-[#fff8fc]"
-                  style={{ fontWeight: 500 }}
-                >
-                  <div className="flex flex-col items-center gap-1">
-                    <div className="bg-[#FF7DCF] text-white px-2 py-1 rounded text-xs">
-                      Popular
-                    </div>
-                    <span>Pro</span>
-                  </div>
-                </th>
-                <th
-                  className="text-center py-4 px-3 md:px-4 font-['Instrument_Sans',_sans-serif] text-base md:text-sm text-[#333333]"
-                  style={{ fontWeight: 500 }}
-                >
-                  Prestige
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {comparisonFeatures.map(
-                (category, categoryIndex) => (
-                  <React.Fragment
-                    key={`category-group-${categoryIndex}`}
+        {/* CONTENEUR DU TABLEAU DESKTOP AVEC LE FLOU PROGRESSIF 
+           On utilise "relative" et "max-h" variable selon l'état
+        */}
+        <div className="hidden md:block relative bg-[#ffffff]">
+          
+          <div 
+            className={`overflow-hidden transition-all duration-700 ease-in-out rounded-lg ${
+              isComparisonExpanded ? "max-h-[3000px]" : "max-h-[600px]"
+            }`}
+          >
+            <table className="w-full min-w-[600px]">
+              <thead>
+                <tr className="bg-[#ffffff] border-b border-[#e2e2e2]">
+                  <th
+                    className="text-left py-4 px-4 md:px-6 font-['Instrument_Sans',_sans-serif] text-base md:text-sm text-[#333333] border-r border-[#e2e2e2]"
+                    style={{ fontWeight: 500 }}
                   >
-                    <tr className="bg-[#f2f2f2]">
-                      <td
-                        colSpan={4}
-                        className="py-3 px-4 md:px-6 font-['Instrument_Sans',_sans-serif] text-base md:text-sm text-[#333333] border-b border-[#e2e2e2]"
-                        style={{ fontWeight: 500 }}
-                      >
-                        {category.category}
-                      </td>
-                    </tr>
-                    {category.features.map(
-                      (feature, featureIndex) => {
-                        const isEven = featureIndex % 2 === 0;
-                        return (
-                          <tr
-                            key={`${categoryIndex}-${featureIndex}`}
-                            className={`${
-                              isEven
-                                ? "bg-[#ffffff]"
-                                : "bg-[#fafafa]"
-                            } hover:bg-[#fff8fc] transition-colors duration-200 border-b border-[#e2e2e2]`}
-                          >
-                            <td
-                              className="py-4 px-4 md:px-6 font-['Geist_Mono',_monospace] text-base md:text-sm text-[#333333] border-r border-[#e2e2e2]"
-                              style={{ fontWeight: 400 }}
+                    Fonctionnalités
+                  </th>
+                  <th
+                    className="text-center py-4 px-3 md:px-4 font-['Instrument_Sans',_sans-serif] text-base md:text-sm text-[#333333] border-r border-[#e2e2e2]"
+                    style={{ fontWeight: 500 }}
+                  >
+                    Signature
+                  </th>
+                  <th
+                    className="text-center py-4 px-3 md:px-4 font-['Instrument_Sans',_sans-serif] text-base md:text-sm text-[#333333] border-r border-[#e2e2e2] bg-[#fff8fc]"
+                    style={{ fontWeight: 500 }}
+                  >
+                    <div className="flex flex-col items-center gap-1">
+                      <div className="bg-[#FF7DCF] text-white px-2 py-1 rounded text-xs">
+                        Popular
+                      </div>
+                      <span>Pro</span>
+                    </div>
+                  </th>
+                  <th
+                    className="text-center py-4 px-3 md:px-4 font-['Instrument_Sans',_sans-serif] text-base md:text-sm text-[#333333]"
+                    style={{ fontWeight: 500 }}
+                  >
+                    Prestige
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparisonFeatures.map(
+                  (category, categoryIndex) => (
+                    <React.Fragment
+                      key={`category-group-${categoryIndex}`}
+                    >
+                      <tr className="bg-[#f2f2f2]">
+                        <td
+                          colSpan={4}
+                          className="py-3 px-4 md:px-6 font-['Instrument_Sans',_sans-serif] text-base md:text-sm text-[#333333] border-b border-[#e2e2e2]"
+                          style={{ fontWeight: 500 }}
+                        >
+                          {category.category}
+                        </td>
+                      </tr>
+                      {category.features.map(
+                        (feature, featureIndex) => {
+                          const isEven = featureIndex % 2 === 0;
+                          return (
+                            <tr
+                              key={`${categoryIndex}-${featureIndex}`}
+                              className={`${
+                                isEven
+                                  ? "bg-[#ffffff]"
+                                  : "bg-[#fafafa]"
+                              } hover:bg-[#fff8fc] transition-colors duration-200 border-b border-[#e2e2e2]`}
                             >
-                              {feature.name}
-                            </td>
-                            <td className="text-center py-4 px-3 md:px-4 border-r border-[#e2e2e2]">
-                              {typeof feature.signature ===
-                              "boolean" ? (
-                                feature.signature ? (
-                                  <Check className="h-5 w-5 md:h-4 md:w-4 text-[#71e988] mx-auto" />
+                              <td
+                                className="py-4 px-4 md:px-6 font-['Geist_Mono',_monospace] text-base md:text-sm text-[#333333] border-r border-[#e2e2e2]"
+                                style={{ fontWeight: 400 }}
+                              >
+                                {feature.name}
+                              </td>
+                              <td className="text-center py-4 px-3 md:px-4 border-r border-[#e2e2e2]">
+                                {typeof feature.signature ===
+                                "boolean" ? (
+                                  feature.signature ? (
+                                    <Check className="h-5 w-5 md:h-4 md:w-4 text-[#71e988] mx-auto" />
+                                  ) : (
+                                    <X className="h-5 w-5 md:h-4 md:w-4 text-[#d2d2d2] mx-auto" />
+                                  )
                                 ) : (
-                                  <X className="h-5 w-5 md:h-4 md:w-4 text-[#d2d2d2] mx-auto" />
-                                )
-                              ) : (
-                                <span
-                                  className="font-['Geist_Mono',_monospace] text-base md:text-sm text-[#6a6a6a] bg-[#f2f2f2] px-2 py-1 rounded"
-                                  style={{ fontWeight: 400 }}
-                                >
-                                  {feature.signature}
-                                </span>
-                              )}
-                            </td>
-                            <td className="text-center py-4 px-3 md:px-4 border-r border-[#e2e2e2] bg-[#fff8fc]">
-                              {typeof feature.pro ===
-                              "boolean" ? (
-                                feature.pro ? (
-                                  <Check className="h-5 w-5 md:h-4 md:w-4 text-[#71e988] mx-auto" />
+                                  <span
+                                    className="font-['Geist_Mono',_monospace] text-base md:text-sm text-[#6a6a6a] bg-[#f2f2f2] px-2 py-1 rounded"
+                                    style={{ fontWeight: 400 }}
+                                  >
+                                    {feature.signature}
+                                  </span>
+                                )}
+                              </td>
+                              <td className="text-center py-4 px-3 md:px-4 border-r border-[#e2e2e2] bg-[#fff8fc]">
+                                {typeof feature.pro ===
+                                "boolean" ? (
+                                  feature.pro ? (
+                                    <Check className="h-5 w-5 md:h-4 md:w-4 text-[#71e988] mx-auto" />
+                                  ) : (
+                                    <X className="h-5 w-5 md:h-4 md:w-4 text-[#d2d2d2] mx-auto" />
+                                  )
                                 ) : (
-                                  <X className="h-5 w-5 md:h-4 md:w-4 text-[#d2d2d2] mx-auto" />
-                                )
-                              ) : (
-                                <span
-                                  className="font-['Geist_Mono',_monospace] text-base md:text-sm text-[#FF7DCF] bg-[#fff0f8] px-2 py-1 rounded"
-                                  style={{ fontWeight: 400 }}
-                                >
-                                  {feature.pro}
-                                </span>
-                              )}
-                            </td>
-                            <td className="text-center py-4 px-3 md:px-4">
-                              {typeof feature.prestige ===
-                              "boolean" ? (
-                                feature.prestige ? (
-                                  <Check className="h-5 w-5 md:h-4 md:w-4 text-[#71e988] mx-auto" />
+                                  <span
+                                    className="font-['Geist_Mono',_monospace] text-base md:text-sm text-[#FF7DCF] bg-[#fff0f8] px-2 py-1 rounded"
+                                    style={{ fontWeight: 400 }}
+                                  >
+                                    {feature.pro}
+                                  </span>
+                                )}
+                              </td>
+                              <td className="text-center py-4 px-3 md:px-4">
+                                {typeof feature.prestige ===
+                                "boolean" ? (
+                                  feature.prestige ? (
+                                    <Check className="h-5 w-5 md:h-4 md:w-4 text-[#71e988] mx-auto" />
+                                  ) : (
+                                    <X className="h-5 w-5 md:h-4 md:w-4 text-[#d2d2d2] mx-auto" />
+                                  )
                                 ) : (
-                                  <X className="h-5 w-5 md:h-4 md:w-4 text-[#d2d2d2] mx-auto" />
-                                )
-                              ) : (
-                                <span
-                                  className="font-['Geist_Mono',_monospace] text-base md:text-sm text-[#6a6a6a] bg-[#f2f2f2] px-2 py-1 rounded"
-                                  style={{ fontWeight: 400 }}
-                                >
-                                  {feature.prestige}
-                                </span>
-                              )}
-                            </td>
-                          </tr>
-                        );
-                      },
-                    )}
-                  </React.Fragment>
-                ),
-              )}
-            </tbody>
-          </table>
+                                  <span
+                                    className="font-['Geist_Mono',_monospace] text-base md:text-sm text-[#6a6a6a] bg-[#f2f2f2] px-2 py-1 rounded"
+                                    style={{ fontWeight: 400 }}
+                                  >
+                                    {feature.prestige}
+                                  </span>
+                                )}
+                              </td>
+                            </tr>
+                          );
+                        },
+                      )}
+                    </React.Fragment>
+                  ),
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          {/* LE DÉGRADÉ BLANC QUI CRÉE LE FLOU (VISIBLE SI FERMÉ) */}
+          {!isComparisonExpanded && (
+            <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none z-10" />
+          )}
+
+          {/* LE BOUTON POUR DÉROULER (Positionné par dessus le dégradé) */}
+          <div className={`absolute bottom-8 left-0 right-0 flex justify-center z-20 ${isComparisonExpanded ? 'relative mt-8 bottom-0' : ''}`}>
+             <button
+              onClick={() => setIsComparisonExpanded(!isComparisonExpanded)}
+              className="bg-white border border-[#d2d2d2] hover:border-[#333] text-[#333] px-6 py-3 rounded-full shadow-lg flex items-center gap-2 transition-all duration-300 font-['Instrument_Sans',_sans-serif] font-medium text-sm"
+             >
+               {isComparisonExpanded ? (
+                 <>
+                   Réduire le tableau <ChevronUp className="h-4 w-4" />
+                 </>
+               ) : (
+                 <>
+                   Voir toutes les fonctionnalités <ChevronDown className="h-4 w-4" />
+                 </>
+               )}
+             </button>
+          </div>
+
         </div>
 
         {/* Version Mobile - Dropdowns intelligents */}
         {renderMobileComparison()}
       </div>
 
-      {/* CTA Section Simplifiée */}
-      <div className="text-center bg-white border border-[#e2e2e2] rounded-lg p-8 md:p-12">
-        <div className="max-w-3xl mx-auto">
-          {/* Titre principal */}
-          <h3
-            className="font-['Geist',_sans-serif] text-5xl md:text-4xl tracking-[-0.02em] text-[#333333] mb-6"
-            style={{ fontWeight: 500 }}
-          >
-            Vous hésitez ?
-          </h3>
 
-          {/* Sous-titre */}
-          <p
-            className="font-['Instrument_Sans',_sans-serif] text-xl md:text-lg text-[#6a6a6a] mb-10 leading-relaxed"
-            style={{ fontWeight: 400 }}
-          >
-            On vous offre un diagnostic stratégique personnalisé
-            pour clarifier vos objectifs et identifier les
-            leviers de croissance les plus pertinents pour votre
-            business.
-          </p>
-
-          {/* Bouton CTA WebAcces Style */}
-          <button
-            className="group px-8 py-5 md:py-4 bg-[#f2f2f2] hover:bg-[#e2e2e2] text-[#333333] border border-[#d2d2d2] hover:border-[#2b2b2b] rounded-lg transition-all duration-200 font-['Instrument_Sans',_sans-serif] cursor-pointer mb-10 text-lg md:text-base"
-            style={{ fontWeight: 500 }}
-          >
-            <div className="flex items-center justify-center gap-3">
-              <Phone className="h-6 w-6 md:h-5 md:w-5 group-hover:rotate-12 transition-transform duration-200" />
-              <span>Échange avec un expert (15min)</span>
-              <ArrowRight className="h-6 w-6 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform duration-200" />
-            </div>
-          </button>
-
-          {/* Badges de confiance */}
-          <div className="flex flex-wrap justify-center gap-4">
-            <div className="bg-[#F2F2F2] border border-[#e2e2e2] rounded-full px-6 py-3 md:py-2">
-              <div
-                className="flex items-center justify-center gap-2 font-['Instrument_Sans',_sans-serif] text-base md:text-sm text-[#333333]"
-                style={{ fontWeight: 500 }}
-              >
-                <Shield className="h-5 w-5 md:h-4 md:w-4 text-[#71e988]" />
-                <span>Projets sélectionnés</span>
-              </div>
-            </div>
-            <div className="bg-[#F2F2F2] border border-[#e2e2e2] rounded-full px-6 py-3 md:py-2">
-              <div
-                className="flex items-center justify-center gap-2 font-['Instrument_Sans',_sans-serif] text-base md:text-sm text-[#333333]"
-                style={{ fontWeight: 500 }}
-              >
-                <CreditCard className="h-5 w-5 md:h-4 md:w-4 text-[#707eff]" />
-                <span>Paiement sécurisé</span>
-              </div>
-            </div>
-            <div className="bg-[#F2F2F2] border border-[#e2e2e2] rounded-full px-6 py-3 md:py-2">
-              <div
-                className="flex items-center justify-center gap-2 font-['Instrument_Sans',_sans-serif] text-base md:text-sm text-[#333333]"
-                style={{ fontWeight: 500 }}
-              >
-                <Check className="h-5 w-5 md:h-4 md:w-4 text-[#ff7dcf]" />
-                <span>Accompagnement VIP</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
